@@ -11,19 +11,16 @@
       background: #f5f5f5;
       color: #333;
     }
-
     .container {
       width: 100%;
       max-width: 100%;
       padding: 16px;
       margin: 0 auto;
     }
-
     h1 {
       text-align: center;
       margin-bottom: 24px;
     }
-
     .summary {
       display: flex;
       flex-wrap: wrap;
@@ -31,7 +28,6 @@
       justify-content: space-between;
       margin-bottom: 24px;
     }
-
     .card {
       background: white;
       border-radius: 12px;
@@ -40,18 +36,15 @@
       min-width: 200px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
     .card .label {
       font-size: 14px;
       color: #666;
     }
-
     .card .value {
       font-size: 20px;
       font-weight: bold;
       margin-top: 8px;
     }
-
     .main {
       display: flex;
       flex-wrap: wrap;
@@ -60,7 +53,6 @@
       max-width: 100%;
       overflow-x: hidden;
     }
-
     .form-box, .table-box {
       background: white;
       padding: 16px;
@@ -70,13 +62,11 @@
       max-width: 100%;
       min-width: 0;
     }
-
     form label {
       display: block;
       margin-top: 12px;
       font-weight: bold;
     }
-
     form select, form input {
       width: 100%;
       padding: 10px;
@@ -84,7 +74,6 @@
       border: 1px solid #ccc;
       margin-top: 6px;
     }
-
     form button {
       margin-top: 16px;
       padding: 12px;
@@ -96,23 +85,19 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .table-scroll {
       overflow-x: auto;
     }
-
     table {
       width: 100%;
       min-width: 600px;
       border-collapse: collapse;
     }
-
     th, td {
       padding: 12px;
       text-align: center;
       border-bottom: 1px solid #ddd;
     }
-    
     .btn-edit {
       background: blue;
       color: white;
@@ -120,7 +105,6 @@
       border: none;
       border-radius: 6px;
     }
-    
     .btn-hapus  {
       background: red;
       color: white;
@@ -128,10 +112,8 @@
       border: none;
       border-radius: 6px;
     }
-
     .green { color: green; font-weight: bold; }
     .red { color: red; font-weight: bold; }
-
     .footer {
       margin-top: 12px;
       width: 100%;
@@ -140,7 +122,6 @@
       text-align: center;
       padding: 1rem 1rem;
     }
-
     .footer .btn {
       display: inline-block;
       margin-top: 6px;
@@ -152,11 +133,9 @@
       font-size: 14px;
       transition: background 0.3s ease;
     }
-
     .footer .btn:hover {
       background: #06c;
     }
-
     .modal, .confirm {
       position: fixed;
       top: 0; left: 0;
@@ -167,7 +146,6 @@
       align-items: center;
       z-index: 999;
     }
-
     .modal-content, .confirm-content {
       background: white;
       padding: 20px;
@@ -175,7 +153,6 @@
       width: 90%;
       max-width: 400px;
     }
-
     .modal-content input, .modal-content select {
       width: 100%;
       margin-top: 10px;
@@ -183,12 +160,10 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-
     .modal-buttons {
       margin-top: 16px;
       text-align: right;
     }
-
     .modal-buttons button {
       margin-left: 10px;
       padding: 8px 16px;
@@ -196,10 +171,8 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
     .modal-buttons .confirm-btn { background: red; color: white; }
     .modal-buttons .cancel-btn { background: #ccc; }
-
     @media (min-width: 769px) {
       .form-box, .table-box {
         flex: 1 1 48%;
@@ -213,12 +186,13 @@
 <body>
   <div class="container">
     <h1>Catatan Uangmu</h1>
-    <div class="card">
-      <div class="value">Informasi</div>
-      <a class="label">Hiii! Sorry yach belom bisa disimpen, jadi kalau kalian nambahin catatan dan hilang saat dibuka/refresh itu karena website ini belum ada storage buat taruh data tabel kalian</a>
-      <a class="label">dan mungkin website ini masih banyak bug, tapi bakal di perbaiki dalam beberapa hari kedepan</a>
-    </div>
-    <br><br>
+    <div class="summary">
+      <div class="card">
+        <div class="value">Informasi</div>
+        <p class="label">Website ini full rilis, kalau ada saran wa gwe aja.</a>
+        <p class="label">dan jangan reset cache atau data browser kalian kalau gamau catatannya hilang</p>
+      </div>
+    </div><br>
 
     <div class="summary">
       <div class="card">
@@ -244,10 +218,8 @@
             <option value="pemasukan">Pemasukan</option>
             <option value="pengeluaran">Pengeluaran</option>
           </select>
-
           <label for="nominal">Nominal:</label>
           <input type="number" id="nominal" required>
-
           <button type="submit">Tambah</button>
         </form>
       </div>
@@ -270,6 +242,7 @@
       </div>
     </div>
   </div>
+
   <footer class="footer">
     <p>&copy; Copyright 2025. All rights reserved.</p>
     <a onclick="setTimeout(()=>alert('Failed to connect to server. Response: The server is currently under maintenance.'),800)" class="btn">Portofolio Developer</a>
@@ -310,6 +283,11 @@
     const tabelBody = document.getElementById("tabel-body");
     const form = document.getElementById("form");
 
+    const stored = localStorage.getItem("catatanKeuangan");
+    if (stored) {
+      try { data = JSON.parse(stored); } catch { data = []; }
+    }
+
     form.addEventListener("submit", e => {
       e.preventDefault();
       const tipe = document.getElementById("tipe").value;
@@ -318,30 +296,41 @@
       if (!nominal || nominal <= 0) return;
       data.push({ tipe, nominal, tanggal });
       form.reset();
-      render();
+      saveAndRender();
     });
+
+    function saveAndRender() {
+      localStorage.setItem("catatanKeuangan", JSON.stringify(data));
+      render();
+    }
 
     function render() {
       tabelBody.innerHTML = "";
       let total = 0;
-      const reversed = [...data].reverse();
+      const runningTotals = [];
 
-      reversed.forEach((item, idx) => {
+      data.forEach(item => {
         total += item.tipe === "pemasukan" ? item.nominal : -item.nominal;
+        runningTotals.push(total);
+      });
+
+      for (let i = data.length - 1; i >= 0; i--) {
+        const item = data[i];
+        const rowTotal = runningTotals[i];
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${item.tanggal}</td>
           <td class="${item.tipe === "pemasukan" ? "green" : "red"}">
             ${item.tipe === "pengeluaran" ? "-" : ""}Rp${item.nominal.toLocaleString()}
           </td>
-          <td>Rp${total.toLocaleString()}</td>
+          <td>Rp${rowTotal.toLocaleString()}</td>
           <td>
-            <button class= "btn-edit"onclick="openEdit(${data.length - 1 - idx})">Edit</button>
-            <button class= "btn-hapus" onclick="openDelete(${data.length - 1 - idx})">Hapus</button>
+            <button class="btn-edit" onclick="openEdit(${i})">Edit</button>
+            <button class="btn-hapus" onclick="openDelete(${i})">Hapus</button>
           </td>
         `;
         tabelBody.appendChild(tr);
-      });
+      }
 
       const pemasukan = data.filter(d => d.tipe === "pemasukan").reduce((a, b) => a + b.nominal, 0);
       const pengeluaran = data.filter(d => d.tipe === "pengeluaran").reduce((a, b) => a + b.nominal, 0);
@@ -369,7 +358,7 @@
       if (!nominal || nominal <= 0) return;
       data[editIndex] = { ...data[editIndex], tipe, nominal };
       closeEdit();
-      render();
+      saveAndRender();
     }
 
     function openDelete(index) {
@@ -381,9 +370,11 @@
       document.getElementById("modal-hapus").style.display = "none";
       if (yes && deleteIndex !== null) {
         data.splice(deleteIndex, 1);
-        render();
+        saveAndRender();
       }
     }
+
+    render();
   </script>
 </body>
 </html>
