@@ -401,26 +401,26 @@
        URL.revokeObjectURL(url);
       }
 
-    function importFromFile() {
-      const fileInput = document.getElementById('import-file');
-      const file = fileInput.files[0];
-      if (!file) return alert('Pilih file JSON dulu');
+      function importFromFile() {
+        const fileInput = document.getElementById('import-file');
+        const file = fileInput.files[0];
+        if (!file) return alert('Pilih file JSON dulu');
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const parsed = JSON.parse(e.target.result);
-          if (!Array.isArray(parsed)) throw new Error('Format tidak valid');
-          localStorage.setItem('catatanKeuangan', JSON.stringify(parsed));
-          alert('Data berhasil diimpor dari file!');
-          data = parsed;
-          render();
-          } catch (err) {
-           alert('Gagal impor: ' + err.message);
-          }
-        };
-      reader.readAsText(file);
-    }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            if (!Array.isArray(parsed)) throw new Error('Format tidak valid');
+            localStorage.setItem('catatanKeuangan', JSON.stringify(parsed));
+            alert('Data berhasil diimpor dari file!');
+            data = parsed;
+            render();
+            } catch (err) {
+             alert('Gagal impor: ' + err.message);
+            }
+          };
+        reader.readAsText(file);
+      }
     </script>
 </body>
 </html>
