@@ -241,19 +241,24 @@
       </div>
     </div>
   </div>
-
-  <div style="padding:16px; background:#fff; margin-top:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-    <h3>Backup & Restore Data</h3>
-    <textarea id="backup-area" style="width:100%;height:120px;padding:10px;border-radius:6px;border:1px solid #ccc;"></textarea>
-    <div style="display:flex;gap:10px;margin-top:10px;">
-      <button onclick="downloadBackup()" style="flex:1;padding:10px;background:#007bff;color:#fff;border:none;border-radius:6px;">Download Backup</button>
-      <input type="file" id="import-file" accept="application/json" style="margin-top:10px;">
-      <button onclick="importFromFile()" style="flex:1;padding:10px;background:#17a2b8;color:#fff;border:none;border-radius:6px;">Impor dari File</button>
-      
-<--!      <button onclick="exportData()" style="flex:1;padding:10px;background:#28a745;color:#fff;border:none;border-radius:6px;">Ekspor Data</button> -->
-<--!      <button onclick="importData()" style="flex:1;padding:10px;background:#ffc107;color:#000;border:none;border-radius:6px;">Impor Data</button> -->
+  <div style="margin-top:30px;padding:15px;background:#f9f9f9;border-radius:8px;">
+    <h3 style="margin-top:0;">Backup & Restore</h3>
+  
+    <div style="margin-top:10px;">
+      <button onclick="downloadBackup()" 
+        style="display:inline-block;padding:10px;margin:5px 0;background:#007bff;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+        Download Backup (.json)
+      </button>
     </div>
-    <p style="font-size:12px;color:#666;margin-top:8px;">Salin teks ini untuk backup. Untuk restore, tempel data JSON yang valid lalu klik Impor.</p>
+
+    <div style="margin-top:10px;">
+      <input type="file" id="import-file" accept="application/json" style="margin-top:10px;display:block;">
+      <button onclick="importFromFile()" style="display:inline-block;padding:10px;margin:5px 0;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+      Impor dari File
+      </button>
+    </div>
+
+    <p style="font-size:12px;color:#666;margin-top:8px;">Gunakan fitur ini untuk backup & restore data Anda.</p>
   </div>
   
 
