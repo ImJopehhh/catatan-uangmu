@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Catatan Uangmu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    // inisialisasi
+    initFirebase();
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // jika belum login -> redirect ke login.html
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        location.replace('login.html');
+        return;
+      }
+      // user terautentikasi, muat app utama
+      window.CURRENT_UID = user.uid;
+      // load file app.js yang mengandung semua logic main
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
