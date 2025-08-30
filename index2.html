@@ -7,7 +7,97 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<body>
+  <div class="container">
+    <h1>Catatan Uangmu</h1>
+    <div class="summary">
+      <div class="card">
+        <div class="value">Informasi</div>
+        <p class="label">Website ini full rilis, kalau ada saran wa gwe aja.</a>
+        <p class="label">dan jangan reset cache atau data browser kalian kalau gamau catatannya hilang</p>
+      </div>
+    </div><br>
 
+    <div class="summary">
+      <div class="card">
+        <div class="label">Total Uang</div>
+        <div class="value" id="total-uang">Rp0</div>
+      </div>
+      <div class="card">
+        <div class="label">Total Pemasukan</div>
+        <div class="value" id="total-pemasukan">Rp0</div>
+      </div>
+      <div class="card">
+        <div class="label">Total Pengeluaran</div>
+        <div class="value" id="total-pengeluaran">Rp0</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="form-box">
+        <h2>Tambah Catatan</h2>
+        <form id="form">
+          <label for="tipe">Tipe:</label>
+          <select id="tipe">
+            <option value="pemasukan">Pemasukan</option>
+            <option value="pengeluaran">Pengeluaran</option>
+          </select>
+          <label for="nominal">Nominal:</label>
+          <input type="number" id="nominal" required>
+          <button type="submit">Tambah</button>
+        </form>
+      </div>
+
+      <div class="table-box">
+        <h2>Riwayat Catatan</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Nominal</th>
+                <th>Total</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; Copyright 2025. All rights reserved.</p>
+    <a onclick="setTimeout(()=>alert('Failed to connect to server. Response: The server is currently under maintenance.'),800)" class="btn">Portofolio Developer</a>
+  </footer>
+
+  <!-- Modal Edit -->
+  <div class="modal" id="modal-edit">
+    <div class="modal-content">
+      <h3>Edit Catatan</h3>
+      <select id="edit-tipe">
+        <option value="pemasukan">Pemasukan</option>
+        <option value="pengeluaran">Pengeluaran</option>
+      </select>
+      <input type="number" id="edit-nominal">
+      <div class="modal-buttons">
+        <button onclick="closeEdit()" class="cancel-btn">Batal</button>
+        <button onclick="submitEdit()" class="confirm-btn">Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Hapus -->
+  <div class="confirm" id="modal-hapus">
+    <div class="confirm-content">
+      <h3>Hapus catatan ini?</h3>
+      <div class="modal-buttons">
+        <button onclick="confirmDelete(false)" class="cancel-btn">Batal</button>
+        <button onclick="confirmDelete(true)" class="confirm-btn">Hapus</button>
+      </div>
+    </div>
+  </div>
   <!-- Firebase compat SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
